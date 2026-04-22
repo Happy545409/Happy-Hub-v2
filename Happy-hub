@@ -1,0 +1,41 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Happy Hub",
+   LoadingTitle = "Carregando Happy Hub...",
+   LoadingSubtitle = "por Happy & Gb",
+   ConfigurationSaving = {
+      Enabled = false
+   },
+   KeySystem = false
+})
+
+local Tab = Window:CreateTab("Auto Farm", 4483362458)
+
+local Button = Tab:CreateButton({
+   Name = "Clique para ativar",
+   Callback = function()
+       _G.AutoToken = true
+       
+       Rayfield:Notify({
+           Title = "Status",
+           Content = "Em andamento",
+           Duration = 5,
+           Image = 4483362458,
+           Actions = {
+               Ignore = {
+                   Name = "Ok",
+                   Callback = function() end
+               },
+           },
+       })
+
+       while _G.AutoToken do
+           local remote = game:GetService("ReplicatedStorage"):FindFirstChild("AddToken", true)
+           if remote then
+               remote:FireServer(3)
+           end
+           task.wait(3)
+       end
+   end,
+})
